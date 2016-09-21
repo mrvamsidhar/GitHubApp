@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-strict-di>
+<head>
+	<title>Angular ES6 Sample</title>
+</head>
+<body ng-controller="HomeController as vm">
+<div class="container">
+	<div class="panel panel-primary" style="margin-top:20px">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Git Hub Repository Details</strong></h3>
+          </div>
+          <div class="panel-body">
+            <form ng-submit="vm.getRepositories(vm.user.name)">
+              <input type="text" ng-model="vm.user.name" class="form-control" placeholder="Type github user name here, then press Enter" focus>
+            </form>
+          </div>
+	</div>
+  
+  <div ng-hide="vm.respositories.length">
+    <label>{{vm.message}}</label>
+  </div>
+	<table class="table table-bordered" ng-hide="!vm.respositories.length">
+    <thead class="thead-inverse">
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Type</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th>Link</th>
+      <th>Watchers</th>
+    </tr>
+    </thead>
+    <tr ng-repeat="rep in vm.respositories">
+      <td>{{rep.id}}</td>
+      <td>{{rep.name}}</td>
+      <td>{{rep.owner.login}}</td>
+      <td>{{rep.owner.type}}</td>
+      <td>{{rep.created_at | date:'MM/dd/yyyy'}}</td>
+      <td>{{rep.updated_at | date:'MM/dd/yyyy'}}</td>
+      <td><a target="_blank" href="{{rep.svn_url}}">View</a></td>
+      <td>{{rep.watchers}}</td>
+    </tr>
+  </table>
+  
+</div>
+	<script src="libs/angular.min.js"></script>
+	<script src="scripts/app.min.js"></script>
+	<script src="libs/ui-bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="libs/bootstrap.min.css" />	
+</body>
+</html>
